@@ -10,7 +10,7 @@ pipeline{
         stage("代码克隆"){
             steps{
                 sh "cd /var/lib/jenkins/workspace/backend-pipeline && rm -rf ./*"
-                git branch: 'main', credentialsId: '1', url: ${GITREPO}
+                git branch: 'main', credentialsId: '1', url: "${GITREPO}"
                 echo "代码克隆完成"
             }
         }
