@@ -1,3 +1,4 @@
+export JENKINS_NODE_COOKIE=dontkillme
 #!/bin/bash
 APP_NAME=$(pwd)/backend/target/backend-0.0.1-SNAPSHOT.jar 
 
@@ -19,7 +20,7 @@ start(){
     echo "${APP_NAME} is already running. pid=${pid}"
   else
     echo "启动${APP_NAME}"
-    nohup java -jar ${APP_NAME}  > log.out 2>&1 & 
+    nohup java -jar ${APP_NAME} > log.out 2>&1 & 
     echo "启动结束"
   fi
 }
