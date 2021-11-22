@@ -20,4 +20,6 @@ public interface IUserService extends IService<User> {
     User getUser(String account);
     //重置密码
     int resetPass(String account,String oldPassword,String newPassword);
+    //删除用户
+    int delUserByAccount(String account);
 }

@@ -37,7 +37,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         nameWrapper.eq("account", account);
         User existingUser = userMapper.selectOne(nameWrapper);
         if (existingUser != null) {
-            return 0;//0代表userName存在
+            return 0;//0代表account存在
         } else {
             user.setAccount(account);
             user.setPassword(password);
@@ -60,9 +60,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         nameWrapper.eq("account", account);
         nameWrapper.eq("password",oldPassword);
         User existingUser = userMapper.selectOne(nameWrapper);
-        if (existingUser.getId() != null) {
+        if (existingUser != null) {
             existingUser.setPassword(newPassword);
             userMapper.update(existingUser,nameWrapper);
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int delUserByAccount(String account) {
+        QueryWrapper nameWrapper = new QueryWrapper();
+        nameWrapper.eq("account", account);
+        User existingUser = userMapper.selectOne(nameWrapper);
+        if (existingUser != null) {
+            int i = userMapper.delete(nameWrapper);
             return 1;
         } else {
             return 0;
