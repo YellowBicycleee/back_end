@@ -19,13 +19,13 @@ public class ICollegeServiceTest {
 
     @Test
     public void getAllCollegeTest(){
-        List<College> colleges = collegeService.getAllCollege();
+        List<College> colleges = collegeService.getAllCollege(1);
         assertNotNull(colleges);
     }
 
     @Test
     public void getCollegeCityTest(){
-        List<College> colleges = collegeService.getCollegeByCity("北京");
+        List<College> colleges = collegeService.getCollegeByCity("北京",1);
         assertNotNull(colleges);
         assertEquals("北京",colleges.get(0).getCity());
     }

@@ -34,11 +34,11 @@ public class CollegeController {
     private ICollegeService collegeService;
 
     @ApiOperation(value = "查询所有学校")
-    @GetMapping("/all")
-    public String queryAllCollege(){
+    @GetMapping("/all/{page}")
+    public String queryAllCollege(@PathVariable("page") int page){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            List<College> colleges =collegeService.getAllCollege();
+            List<College> colleges =collegeService.getAllCollege(page);
             if(colleges!=null){
                 map.put("status","200");
                 map.put("data",colleges);
@@ -56,11 +56,11 @@ public class CollegeController {
     }
 
     @ApiOperation(value = "根据省份查询学校")
-    @GetMapping("/{province}")
-    public String queryCollegeByCity(@PathVariable("province") String city){
+    @GetMapping("/{province}/{page}")
+    public String queryCollegeByCity(@PathVariable("province") String city,@PathVariable Integer page){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            List<College> colleges =collegeService.getCollegeByCity(city);
+            List<College> colleges =collegeService.getCollegeByCity(city,page);
             if(colleges!=null){
                 map.put("status","200");
                 map.put("data",colleges);

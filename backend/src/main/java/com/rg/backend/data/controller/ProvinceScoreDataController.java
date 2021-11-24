@@ -19,8 +19,8 @@ import static com.rg.backend.util.Constant.PRODUCE_ORIGIN;
 @RestController
 public class ProvinceScoreDataController {
 
-    @GetMapping("/query/{province}/{type}/{fromIndex}")
-    public String getData(@PathVariable("province") String province, @PathVariable("type") String type,@PathVariable("fromIndex") int fromIndex){
+    @GetMapping("/query/{province}/{type}/{fromPage}")
+    public String getData(@PathVariable("province") String province, @PathVariable("type") String type,@PathVariable("fromPage") int fromIndex){
         ProvinceScoreDataService provinceScoreDataService = new ProvinceScoreDataService();
         Map<String,Object> map=new HashMap<String,Object>();
         try{

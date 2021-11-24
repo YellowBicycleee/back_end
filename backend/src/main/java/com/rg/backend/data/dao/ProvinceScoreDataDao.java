@@ -9,10 +9,12 @@ import java.util.List;
 
 public class ProvinceScoreDataDao {
     //传省份和文理科查询
-    public List<ProvinceScoreData> queryByProvinceAndType(String province,String type,int fromIndex) throws SQLException {
+    public List<ProvinceScoreData> queryByProvinceAndType(String province,String type,int fromPage) throws SQLException {
+        int fromIndex = (fromPage-1)*20;
+        int pageLen = 20;
         Connection conn = DBUtil.getConnection();
         String table = province + "_" + type;
-        String sql = "select * from " + table + " limit " + fromIndex + ",50";
+        String sql = "select * from " + table + " limit " + fromIndex + "," + pageLen;
         PreparedStatement ptmt = conn.prepareStatement(sql);
         ResultSet rs = ptmt.executeQuery();
         List<ProvinceScoreData> psdList = new ArrayList<>();

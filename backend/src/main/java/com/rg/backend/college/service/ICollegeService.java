@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2021-11-24
  */
 public interface ICollegeService extends IService<College> {
-    List<College> getAllCollege();
-    List<College> getCollegeByCity(String city);
+    List<College> getAllCollege(Integer page);
+    List<College> getCollegeByCity(String city,Integer page);
 
 }

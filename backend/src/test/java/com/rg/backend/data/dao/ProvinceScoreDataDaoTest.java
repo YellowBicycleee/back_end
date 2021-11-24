@@ -33,12 +33,12 @@ public class ProvinceScoreDataDaoTest {
      */
     @Test
     public void testGetTable() throws SQLException {
-        List<ProvinceScoreData> list = dao.queryByProvinceAndType("海南","文科",0);
+        List<ProvinceScoreData> list = dao.queryByProvinceAndType("海南","文科",1);
         assertNotNull(list);
     }
     @Test
     public void testGetTable2() throws SQLException{
-        List<ProvinceScoreData> list = dao.queryByProvinceAndType("湖北","理科",0);
+        List<ProvinceScoreData> list = dao.queryByProvinceAndType("湖北","理科",10);
         assertNotNull(list);
     }
     @Test(expected = SQLException.class)
@@ -48,5 +48,10 @@ public class ProvinceScoreDataDaoTest {
     @Test(expected = SQLException.class)
     public void testGetTable4() throws SQLException{
         dao.queryByProvinceAndType("湖北","文理科",0);
+    }
+    @Test(expected = SQLException.class)
+    public void testGetTable5() throws SQLException{
+        List<ProvinceScoreData> list = dao.queryByProvinceAndType("湖北","理科",0);
+        assertNotNull(list);
     }
 }

@@ -7,11 +7,7 @@ import com.rg.backend.user.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +33,7 @@ public class UserController {
 
     @ApiOperation(value = "登录验证", notes = "账户密码必须对应")
     @RequestMapping(value="/loginCheck",method = RequestMethod.POST)
-    public String loginCheck(String account,String password){
+    public String loginCheck(String account, String password){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
             User user=userService.loginCheck(account,password);
@@ -113,6 +109,28 @@ public class UserController {
             else if(flag==0){
                 map.put("status","200");
                 map.put("errorMsg","Fail,error password");
+            }
+        }
+        catch(Exception ex){
+            map.put("status","500");
+            map.put("errorMsg","Error:"+ex.getMessage());
+        }
+        return JSON.toJSONString(map);
+    }
+
+    @ApiOperation(value = "删除某个用户", notes = "根据用户名")
+    @RequestMapping(value="/delUser",method = RequestMethod.POST)
+    public String delUser(String account){
+        Map<String,Object> map=new HashMap<String,Object>();
+        try{
+            int i=userService.delUserByAccount(account);
+            if(i==1){
+                map.put("status","200");
+                map.put("msg","Success");
+            }
+            else {
+                map.put("status","500");
+                map.put("errorMsg","Fail,can't find user "+account);
             }
         }
         catch(Exception ex){
