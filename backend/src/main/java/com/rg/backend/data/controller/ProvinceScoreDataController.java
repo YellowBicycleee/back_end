@@ -20,11 +20,11 @@ import static com.rg.backend.util.Constant.PRODUCE_ORIGIN;
 public class ProvinceScoreDataController {
 
     @GetMapping("/query/{province}/{type}/{fromPage}")
-    public String getData(@PathVariable("province") String province, @PathVariable("type") String type,@PathVariable("fromPage") int fromIndex){
+    public String getData(@PathVariable("province") String province, @PathVariable("type") String type,@PathVariable("fromPage") int fromPage){
         ProvinceScoreDataService provinceScoreDataService = new ProvinceScoreDataService();
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            List<ProvinceScoreData> psdList = provinceScoreDataService.queryByProvinceAndType(province,type,fromIndex);
+            List<ProvinceScoreData> psdList = provinceScoreDataService.queryByProvinceAndType(province,type,fromPage);
             if(psdList!=null){
                 map.put("status","200");
                 map.put("data",psdList);

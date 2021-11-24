@@ -57,7 +57,7 @@ public class CollegeController {
 
     @ApiOperation(value = "根据省份查询学校")
     @GetMapping("/{province}/{page}")
-    public String queryCollegeByCity(@PathVariable("province") String city,@PathVariable Integer page){
+    public String queryCollegeByCity(@PathVariable("province") String city,@PathVariable("page") Integer page){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
             List<College> colleges =collegeService.getCollegeByCity(city,page);
