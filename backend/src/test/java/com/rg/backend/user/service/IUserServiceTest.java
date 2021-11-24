@@ -1,4 +1,4 @@
-package com.rg.backend;
+package com.rg.backend.user.service;
 
 import com.rg.backend.user.entity.User;
 import com.rg.backend.user.service.impl.UserServiceImpl;
@@ -10,18 +10,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceImplTest {
+public class IUserServiceTest {
     @Autowired
-    UserServiceImpl userService = new UserServiceImpl();
+    IUserService userService;
 
     @Test
     public void loginCheck() {
         User admin = userService.loginCheck("admin", "password");
         assertNotNull(admin);
-        System.out.println("test");
     }
 
     @Test
@@ -52,5 +50,4 @@ public class UserServiceImplTest {
         i = userService.resetPass("unExistUser","password","newPassword");
         assertEquals(0,i);
     }
-
 }

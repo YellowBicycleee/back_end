@@ -9,10 +9,10 @@ import java.util.List;
 
 public class ProvinceScoreDataDao {
     //传省份和文理科查询
-    public List<ProvinceScoreData> queryByProvinceAndType(String province,String type) throws SQLException {
+    public List<ProvinceScoreData> queryByProvinceAndType(String province,String type,int fromIndex) throws SQLException {
         Connection conn = DBUtil.getConnection();
         String table = province + "_" + type;
-        String sql = "select * from " + table;
+        String sql = "select * from " + table + " limit " + fromIndex + ",50";
         PreparedStatement ptmt = conn.prepareStatement(sql);
         ResultSet rs = ptmt.executeQuery();
         List<ProvinceScoreData> psdList = new ArrayList<>();
@@ -37,6 +37,7 @@ public class ProvinceScoreDataDao {
             provinceScoreData.setRank2020(rs.getInt("2020排名"));
             psdList.add(provinceScoreData);
         }
+        conn.close();
         return psdList;
     }
 

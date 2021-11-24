@@ -35,7 +35,7 @@ public class CollegeController {
 
     @ApiOperation(value = "查询所有学校")
     @GetMapping("/all")
-    public String loginCheck(){
+    public String queryAllCollege(){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
             List<College> colleges =collegeService.getAllCollege();
@@ -57,7 +57,7 @@ public class CollegeController {
 
     @ApiOperation(value = "根据省份查询学校")
     @GetMapping("/{province}")
-    public String loginCheck(@PathVariable("province") String city){
+    public String queryCollegeByCity(@PathVariable("province") String city){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
             List<College> colleges =collegeService.getCollegeByCity(city);

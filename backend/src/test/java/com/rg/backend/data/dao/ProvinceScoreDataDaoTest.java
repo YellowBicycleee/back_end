@@ -1,4 +1,4 @@
-package com.rg.backend;
+package com.rg.backend.data.dao;
 
 import com.rg.backend.data.dao.ProvinceScoreDataDao;
 import com.rg.backend.data.entity.ProvinceScoreData;
@@ -33,20 +33,20 @@ public class ProvinceScoreDataDaoTest {
      */
     @Test
     public void testGetTable() throws SQLException {
-        List<ProvinceScoreData> list = dao.queryByProvinceAndType("海南","文科");
+        List<ProvinceScoreData> list = dao.queryByProvinceAndType("海南","文科",0);
         assertNotNull(list);
     }
     @Test
     public void testGetTable2() throws SQLException{
-        List<ProvinceScoreData> list = dao.queryByProvinceAndType("湖北","理科");
+        List<ProvinceScoreData> list = dao.queryByProvinceAndType("湖北","理科",0);
         assertNotNull(list);
     }
     @Test(expected = SQLException.class)
     public void testGetTable3() throws SQLException{
-        dao.queryByProvinceAndType("武汉","理科");
+        dao.queryByProvinceAndType("武汉","理科",0);
     }
     @Test(expected = SQLException.class)
     public void testGetTable4() throws SQLException{
-        dao.queryByProvinceAndType("湖北","文理科");
+        dao.queryByProvinceAndType("湖北","文理科",0);
     }
 }
