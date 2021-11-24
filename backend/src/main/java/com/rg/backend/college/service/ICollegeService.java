@@ -4,6 +4,7 @@ import com.rg.backend.college.entity.College;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -14,7 +15,7 @@ import java.util.List;
  * @since 2021-11-24
  */
 public interface ICollegeService extends IService<College> {
-    List<College> getAllCollege(Integer page);
-    List<College> getCollegeByCity(String city,Integer page);
+    Map<String,Object> getAllCollege(Integer page);
+    Map<String,Object> getCollegeByCity(String city,Integer page);
 
 }

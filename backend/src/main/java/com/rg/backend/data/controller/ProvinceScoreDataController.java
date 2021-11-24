@@ -1,6 +1,7 @@
 package com.rg.backend.data.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.rg.backend.data.entity.ProvinceScoreData;
 import com.rg.backend.data.service.ProvinceScoreDataService;
 import com.rg.backend.user.entity.User;
@@ -25,9 +26,13 @@ public class ProvinceScoreDataController {
         ProvinceScoreDataService provinceScoreDataService = new ProvinceScoreDataService();
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            List<ProvinceScoreData> psdList = provinceScoreDataService.queryByProvinceAndType(province,type,fromPage);
+            Map<String,Object> map1 = provinceScoreDataService.queryByProvinceAndType(province,type,fromPage);
+            int total = (int) map1.get("total");
+
+            List<ProvinceScoreData> psdList = (List<ProvinceScoreData>) map1.get("provinceScoreDataList");
             if(psdList!=null){
                 map.put("status","200");
+                map.put("total",total);
                 map.put("data",psdList);
             }
             else {

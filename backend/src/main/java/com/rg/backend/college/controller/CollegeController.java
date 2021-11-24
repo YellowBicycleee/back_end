@@ -38,9 +38,12 @@ public class CollegeController {
     public String queryAllCollege(@PathVariable("page") int page){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            List<College> colleges =collegeService.getAllCollege(page);
+            Map<String,Object> map1=collegeService.getAllCollege(page);
+            Long total = (Long) map1.get("total");
+            List<College> colleges = (List<College>) map1.get("colleges");
             if(colleges!=null){
                 map.put("status","200");
+                map.put("total",total);
                 map.put("data",colleges);
             }
             else {
@@ -60,9 +63,12 @@ public class CollegeController {
     public String queryCollegeByCity(@PathVariable("province") String city,@PathVariable("page") Integer page){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            List<College> colleges =collegeService.getCollegeByCity(city,page);
+            Map<String,Object> map1=collegeService.getCollegeByCity(city,page);
+            Long total = (Long) map1.get("total");
+            List<College> colleges = (List<College>) map1.get("colleges");
             if(colleges!=null){
                 map.put("status","200");
+                map.put("total",total);
                 map.put("data",colleges);
             }
             else {

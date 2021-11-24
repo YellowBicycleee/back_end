@@ -5,11 +5,13 @@ import com.rg.backend.util.DBUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProvinceScoreDataDao {
     //传省份和文理科查询
-    public List<ProvinceScoreData> queryByProvinceAndType(String province,String type,int fromPage) throws SQLException {
+    public Map<String, Object> queryByProvinceAndType(String province, String type, int fromPage) throws SQLException {
         int fromIndex = (fromPage-1)*20;
         int pageLen = 20;
         Connection conn = DBUtil.getConnection();
@@ -17,7 +19,7 @@ public class ProvinceScoreDataDao {
         String sql = "select * from " + table + " limit " + fromIndex + "," + pageLen;
         PreparedStatement ptmt = conn.prepareStatement(sql);
         ResultSet rs = ptmt.executeQuery();
-        List<ProvinceScoreData> psdList = new ArrayList<>();
+        List<ProvinceScoreData> provinceScoreDataList = new ArrayList<>();
         ProvinceScoreData provinceScoreData = null;
         while (rs.next()){
             provinceScoreData = new ProvinceScoreData();
@@ -37,10 +39,20 @@ public class ProvinceScoreDataDao {
             provinceScoreData.setRank2019(rs.getInt("2019排名"));
             provinceScoreData.setAvg2020(rs.getInt("2020均分"));
             provinceScoreData.setRank2020(rs.getInt("2020排名"));
-            psdList.add(provinceScoreData);
+            provinceScoreDataList.add(provinceScoreData);
         }
+        sql = "select count(*) as total from " + table;
+        ptmt = conn.prepareStatement(sql);
+        rs = ptmt.executeQuery();
+        int total = 0;
+        while (rs.next()){
+            total = rs.getInt("total");
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("total",total);
+        map.put("provinceScoreDataList",provinceScoreDataList);
         conn.close();
-        return psdList;
+        return map;
     }
 
 

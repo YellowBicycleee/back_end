@@ -10,7 +10,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,16 +28,28 @@ public class CollegeServiceImpl extends ServiceImpl<CollegeMapper, College> impl
     private CollegeMapper collegeMapper;
 
     @Override
-    public List<College> getAllCollege(Integer page) {
+    public Map<String,Object> getAllCollege(Integer page) {
         IPage<College> iPage = new Page<>(page,20);
-        return collegeMapper.selectPage(iPage,null).getRecords();
+        IPage collegePage = collegeMapper.selectPage(iPage,null);
+        Map<String,Object> map=new HashMap<String,Object>();
+        Long total = collegePage.getTotal();
+        List<College> colleges =collegePage.getRecords();
+        map.put("total",total);
+        map.put("colleges",colleges);
+        return map;
     }
 
     @Override
-    public List<College> getCollegeByCity(String city,Integer page) {
+    public Map<String,Object> getCollegeByCity(String city, Integer page) {
         IPage<College> iPage = new Page<>(page,20);
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("city", city);
-        return collegeMapper.selectPage(iPage,wrapper).getRecords();
+        IPage collegePage = collegeMapper.selectPage(iPage,wrapper);
+        Long total = collegePage.getTotal();
+        List<College> colleges =collegePage.getRecords();
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("total",total);
+        map.put("colleges",colleges);
+        return map;
     }
 }

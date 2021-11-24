@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -33,12 +34,18 @@ public class ProvinceScoreDataDaoTest {
      */
     @Test
     public void testGetTable() throws SQLException {
-        List<ProvinceScoreData> list = dao.queryByProvinceAndType("海南","文科",1);
+        Map map = dao.queryByProvinceAndType("海南","文科",1);
+        int total = (int) map.get("total");
+        assertNotNull(total);
+        List<ProvinceScoreData> list = (List<ProvinceScoreData>) map.get("provinceScoreDataList");
         assertNotNull(list);
     }
     @Test
     public void testGetTable2() throws SQLException{
-        List<ProvinceScoreData> list = dao.queryByProvinceAndType("湖北","理科",10);
+        Map map = dao.queryByProvinceAndType("湖北","理科",10);
+        int total = (int) map.get("total");
+        assertNotNull(total);
+        List<ProvinceScoreData> list = (List<ProvinceScoreData>) map.get("provinceScoreDataList");
         assertNotNull(list);
     }
     @Test(expected = SQLException.class)
@@ -51,7 +58,6 @@ public class ProvinceScoreDataDaoTest {
     }
     @Test(expected = SQLException.class)
     public void testGetTable5() throws SQLException{
-        List<ProvinceScoreData> list = dao.queryByProvinceAndType("湖北","理科",0);
-        assertNotNull(list);
+        dao.queryByProvinceAndType("湖北","理科",0);
     }
 }
