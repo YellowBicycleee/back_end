@@ -33,7 +33,7 @@ public class CollegeController {
     @Autowired
     private ICollegeService collegeService;
 
-    @ApiOperation(value = "查询所有学校")
+    @ApiOperation(value = "查询所有学校,分页,每页20条")
     @GetMapping("/all/{page}")
     public String queryAllCollege(@PathVariable("page") int page){
         Map<String,Object> map=new HashMap<String,Object>();
