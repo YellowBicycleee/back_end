@@ -16,7 +16,7 @@ public class ProvinceScoreDataDao {
         int pageLen = 20;
         Connection conn = DBUtil.getConnection();
         String table = province + "_" + type;
-        String sql = "select * from " + table + " limit " + fromIndex + "," + pageLen;
+        String sql = "select * from " + table + " order by `2020均分` desc limit " + fromIndex + "," + pageLen;
         PreparedStatement ptmt = conn.prepareStatement(sql);
         ResultSet rs = ptmt.executeQuery();
         List<ProvinceScoreData> provinceScoreDataList = new ArrayList<>();
