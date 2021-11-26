@@ -27,23 +27,8 @@ public class QuestionController {
     @ApiOperation(value = "智能查询")
     @GetMapping("/")
     public String askQuestion(@PathVariable String question){
-        Map<String,Object> map=new HashMap<String,Object>();
-        try{
-            String answer=sendPost("http://127.0.0.1:5000","question="+question);
-            if(answer!=null){
-                map.put("status","200");
-                map.put("answer",answer);
-            }
-            else {
-                map.put("status","500");
-                map.put("errorMsg","Fail");
-            }
-        }
-        catch(Exception ex){
-            map.put("status","500");
-            map.put("errorMsg","Error:"+ex.getMessage());
-        }
-        return JSON.toJSONString(map);
+        String answer = sendPost("http://127.0.0.1:5000","question="+question);
+        return answer;
     }
 
     //发送请求
