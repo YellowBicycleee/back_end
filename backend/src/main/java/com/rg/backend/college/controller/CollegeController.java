@@ -27,7 +27,7 @@ import static com.rg.backend.util.Constant.PRODUCE_ORIGIN;
  */
 @Api(value = "学校信息接口",tags = "学校信息接口说明")
 //@CrossOrigin(origins={DEVELOP_ORIGIN, PRODUCE_ORIGIN}, allowCredentials="true")
-@CrossOrigin(origins="*", allowCredentials="true")
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/college")
 public class CollegeController {
