@@ -1,10 +1,10 @@
 def VERSION = "v0"
-def GITREPO = "git@github.com:zqrzxwkr-group/backend.git"
+def GITREPO = "git@github.com:YellowBicycleee/back_end.git"
 pipeline{  
     agent { label 'master' }
     tools { 
         jdk 'jdk11'
-        maven 'maven3.6.3' 
+        maven 'maven3.8.6' 
     }
     stages{
         stage("代码克隆"){
