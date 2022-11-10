@@ -21,8 +21,8 @@ public class ProvinceScoreDataDaoTest {
     //连接测试
     @Test
     public void testConnection(){
-        conn = DBUtil.getConnection();
-        assertNotNull(conn);
+//        conn = DBUtil.getConnection();
+//        assertNotNull(conn);
     }
     //初始化dao
     @Before
